@@ -1,0 +1,17 @@
+.summary {
+    clear:both;
+}
+
+.stats {
+    float:left;
+    margin: 2vw;
+}
+
+#gameButtons{
+    clear: both;
+}
+
+.gameButton {
+    float:left;
+    margin: 2vw;
+}
