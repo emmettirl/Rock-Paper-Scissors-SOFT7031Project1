@@ -17,9 +17,12 @@ write cookie
 
 
 class User {
-    constructor(userName, password) {
+    constructor(userName, password, playerScore, computerScore) {
         this.userName = userName;
         this.userPassword = password;
+        this.playerScore = playerScore;
+        this.computerScore = computerScore;
+
     }
 
 
@@ -28,6 +31,12 @@ class User {
         let accountsInstance = getAccounts()
         accountsInstance.addAccount(this)
         accountsInstance.saveAccounts()
+    }
+
+    updateUser(){
+        let accountsInstance = getAccounts();
+        accountsInstance.updateAccount(activeUser);
+        accountsInstance.saveAccounts();
     }
 }
 
@@ -47,8 +56,14 @@ class Accounts {
         let cValue = JSON.stringify(this)
         setCookie(cName, cValue, expiryDays)
     }
-}
 
+    updateAccount(replacementUserObject) {
+        const userIndex = this.userList.findIndex(user => user.userName === replacementUserObject.userName);
+        if (userIndex !== -1) {
+            this.userList[userIndex] = replacementUserObject;
+        }
+    }
+}
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -82,12 +97,11 @@ function getAccounts() {
     let accountsInstance;
 
     if (cookie !== "") {
-        console.log("about to parse")
         jsonData = JSON.parse(cookie);
         accountsInstance = new Accounts();
 
         jsonData.userList.forEach(userData => {
-            const user = new User(userData.userName, userData.userPassword);
+            const user = new User(userData.userName, userData.userPassword, userData.playerScore, userData.computerScore);
             accountsInstance.addAccount(user);
         });
 
@@ -95,16 +109,32 @@ function getAccounts() {
 
     } else {
 
-        console.log("new instance")
         accountsInstance = new Accounts();
-        // console.log(typeof (accountsInstance))
         return accountsInstance
     }
 }
 
 
+function getActiveUserFromURL() {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    let accountInstance = getAccounts();
+    let activeUserName = searchParams.get("name")
+    let ActiveUserObject;
+
+    accountInstance.userList.forEach(user => {
+        if (activeUserName === user.userName){
+            ActiveUserObject = user
+        }
+    });
+
+    return ActiveUserObject
+}
+
+
 function registerNewUser(name, pass){
     let accountsInstance = getAccounts();
+
 
     if (name !== "" && pass !== "") {
         let accountExists = 0;
@@ -116,7 +146,7 @@ function registerNewUser(name, pass){
             }
         }
         if (accountExists === 0) {
-            const user = new User(name, pass);
+            const user = new User(name, pass, 0, 0);
             document.getElementById("userDataWarn").innerHTML = "User Registered, please Log in";
             user.saveUser();
         }
@@ -131,7 +161,7 @@ function loginExistingUser(name, pass) {
         let accountsInstance = getAccounts()
         for (let i = 0; i < accountsInstance.userList.length; i++) {
             if (accountsInstance.userList[i].userName === name && accountsInstance.userList[i].userPassword === pass) {
-                window.location.href = "game.html?name=${userList[i].userName}";
+                window.location.href = `game.html?name=${accountsInstance.userList[i].userName}`;
             } else {
                 document.getElementById("userDataWarn").innerHTML = "No account exists with that username, please register before logging in";
             }
@@ -183,10 +213,6 @@ function letter0Upper(word) {
 }
 
 function runGame(player1Choice){
-    let cookie = getCookie();
-    if (cookie != ""){
-        playerScore = cookie[1]
-    }
 
     let player2Choice = getComputerChoice();
 
@@ -196,26 +222,45 @@ function runGame(player1Choice){
     document.getElementById("computerResult").innerHTML = letter0Upper(player2Choice);
     switch (result) {
         case 0:
-            console.log("tie");
             document.getElementById("endresult").innerHTML="It's a tie!";
             break;
         case 1:
-            console.log("player win");
             document.getElementById("endresult").innerHTML="You Win!";
+            activeUser.playerScore ++;
+            activeUser.updateUser()
             break;
         case 2:
-            console.log("computer win");
             document.getElementById("endresult").innerHTML="You Lose!";
+            activeUser.computerScore ++;
+            activeUser.updateUser()
             break;
     }
+    document.getElementById("playerScore").innerHTML = activeUser.playerScore;
+    document.getElementById("computerScore").innerHTML = activeUser.computerScore;
 }
 
+
+
+function endsWithSubstring(inputString, substring) {
+    const pattern = new RegExp(`${substring}$`);
+    return pattern.test(inputString);
+}
+
+
 //Main Script Logic
+const cName = "RockPaperScissors";
+const expiryDays = 5;
 
+const activeUser = getActiveUserFromURL();
 
-//cookie information
-const cName = "RpsAccountInfo"
-const expiryDays = 5
-
+if(endsWithSubstring(window.location.pathname, "game.html")){
+    if (activeUser.userName === null) {
+        window.location.href = "index.html";
+    }
+    window.onload = function(){
+        document.getElementById("playerScore").innerText= activeUser.playerScore
+        document.getElementById("computerScore").innerText= activeUser.computerScore
+    };
+}
 
 
