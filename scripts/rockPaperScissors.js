@@ -3,11 +3,6 @@
 use same cookie as login.js to track scores
 
 
-
-HTML write playerChoice
-HTML write computerChoice
-HTML write result
-
 activearray = readCookie()
 
 if winCheck == 1:
@@ -56,14 +51,32 @@ function getComputerChoice(){
 }
 
 
-//main logic
-
-player2 = getComputerChoice()
-
-result = rockPaperScissors("rock", player2);
-console.log(player2)
-switch (result) {
-    case 0: console.log("tie"); break;
-    case 1: console.log("player win"); break;
-    case 2: console.log("computer win"); break;
+function letter0Upper(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
+
+
+function runGame(player1Choice){
+    player2Choice = getComputerChoice()
+
+    result = rockPaperScissors(player1Choice, player2Choice);
+    console.log(player2Choice)
+    document.getElementById("playerResult").innerHTML = letter0Upper(player1Choice);
+    document.getElementById("computerResult").innerHTML = letter0Upper(player2Choice);
+    switch (result) {
+        case 0:
+            console.log("tie");
+            document.getElementById("endresult").innerHTML="It's a tie!";
+            break;
+        case 1:
+            console.log("player win");
+            document.getElementById("endresult").innerHTML="You Win!";
+            break;
+        case 2:
+            console.log("computer win");
+            document.getElementById("endresult").innerHTML="You Lose!";
+            break;
+    }
+}
+

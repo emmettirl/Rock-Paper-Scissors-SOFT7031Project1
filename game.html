@@ -14,21 +14,21 @@
 
             <div id="gameButtons">
                 <section class="gameButton">
-                    <button id="rock" class="option">
+                    <button id="rock" class="option" onclick="runGame('rock')">
                             <img src="images/icons8-hand-rock-100.png" alt="Rock" >
                     </button>
                     <p>Rock</p>
                 </section>
 
                 <section class="gameButton">
-                    <button id="paper" class="option">
+                    <button id="paper" class="option" onclick="runGame('paper')">
                             <img src="images/icons8-hand-100.png" alt="Paper">
                     </button>
                     <p>Paper</p>
                 </section>
 
                 <section class="gameButton">
-                    <button id="scissors" class="option">
+                    <button id="scissors" class="option" onclick="runGame('scissors')">
                             <img src="images/icons8-hand-scissors-100.png" alt="Scissors">
                     </button>
                     <p>Scissors</p>
@@ -40,7 +40,7 @@
 
                 <section class="stats" id="results">
                     <h1>Results</h1>
-                    <p>You: <span id="playerResult">playerResult</span></p>
+                    <p>You: <span id="playerResult"></span></p>
                     <p>Computer: <span id="computerResult"></span></p>
                     <p><i id="endresult">Click for a result! </i></p>
                 </section>
