@@ -8,6 +8,8 @@ class User {
     }
 
     saveUser() {
+
+        accountsInstance = getAccounts()
         accountsInstance.addAccount(this)
         accountsInstance.saveAccounts()
     }
@@ -21,13 +23,13 @@ class Accounts {
     };
 
 
+
     addAccount(account) {
         this.userList.push(account)
     }
 
     saveAccounts() {
         let cValue = JSON.stringify(this)
-
         setCookie(cName, cValue, expiryDays)
     }
 }
@@ -56,23 +58,64 @@ function getCookie(cname) {
     return "";
 }
 
+function getAccounts() {
+    cookie = getCookie(cName)
+
+    let jsonData;
+    let accountsInstance;
+    if (cookie != "") {
+        console.log("about to parse")
+        jsonData = JSON.parse(cookie);
+        accountsInstance = new Accounts();
+
+        jsonData.userList.forEach(userData => {
+            const user = new User(userData.userName, userData.userPassword);
+            accountsInstance.addAccount(user);
+        });
+
+        return accountsInstance
+
+    } else {
+
+        console.log("new instance")
+        accountsInstance = new Accounts();
+        // console.log(typeof (accountsInstance))
+        return accountsInstance
+    }
+}
+
+
+
 function registerNewUser(name, pass){
 
+    console.log(name)
+    console.log(pass)
+    let accountExists = 0;
     for (let i = 0; i<accountsInstance.userList.length; i++) {
         if (accountsInstance.userList[i].userName===name){
-            return null;
+            document.getElementById("userDataWarn").innerHTML = "user already exists, try logging in or use a different username";
+            accountExists = 1;
+            break;
         }
     }
-    const user= new User(name, pass);
-    return user.saveUser();
+    if (accountExists == 0) {
+        const user= new User(name, pass);
+        document.getElementById("userDataWarn").innerHTML = "User Registered, please Log in";
+        user.saveUser();
+    }
+
+
 
 }
 
 function loginExistingUser(name, pass) {
+
+    let accountsInstance = getAccounts()
     for (let i = 0; i<accountsInstance.userList.length; i++) {
-        if (accountsInstance.userList[i].userName===name && accountsInstance.userList[i].userPassword===pass){
-            console.log(User)
-            return User;
+        if (accountsInstance.userList[i].userName===name && accountsInstance.userList[i].userPassword===pass) {
+            window.location.href = "game.html?name=${userList[i].userName}";
+        } else {
+            document.getElementById("userDataWarn").innerHTML = "No account exists with that username, please register before logging in";
         }
     }
     return null
@@ -87,14 +130,6 @@ function loginExistingUser(name, pass) {
 const cName = "RPSAccountInfo"
 const expiryDays = 5
 
-cookie = getCookie(cName)
-console.log(cookie.toString())
+accountsInstance = getAccounts(cName)
+console.log(accountsInstance)
 
-if (cookie != "") {
-    console.log("about to parse")
-    accountsInstance = JSON.parse(cookie);
-} else {
-
-    console.log("new instance")
-    accountsInstance = new Accounts();
-}
