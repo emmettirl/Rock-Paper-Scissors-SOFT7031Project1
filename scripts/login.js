@@ -9,7 +9,7 @@ class User {
 
     saveUser() {
 
-        accountsInstance = getAccounts()
+        let accountsInstance = getAccounts()
         accountsInstance.addAccount(this)
         accountsInstance.saveAccounts()
     }
@@ -59,11 +59,11 @@ function getCookie(cname) {
 }
 
 function getAccounts() {
-    cookie = getCookie(cName)
+    let cookie = getCookie(cName)
 
     let jsonData;
     let accountsInstance;
-    if (cookie != "") {
+    if (cookie !== "") {
         console.log("about to parse")
         jsonData = JSON.parse(cookie);
         accountsInstance = new Accounts();
@@ -88,20 +88,22 @@ function getAccounts() {
 
 function registerNewUser(name, pass){
 
-    console.log(name)
-    console.log(pass)
-    let accountExists = 0;
-    for (let i = 0; i<accountsInstance.userList.length; i++) {
-        if (accountsInstance.userList[i].userName===name){
-            document.getElementById("userDataWarn").innerHTML = "user already exists, try logging in or use a different username";
-            accountExists = 1;
-            break;
+    if (name !== "" && pass !== "") {
+        let accountExists = 0;
+        for (let i = 0; i < accountsInstance.userList.length; i++) {
+            if (accountsInstance.userList[i].userName === name) {
+                document.getElementById("userDataWarn").innerHTML = "user already exists, try logging in or use a different username";
+                accountExists = 1;
+                break;
+            }
         }
-    }
-    if (accountExists == 0) {
-        const user= new User(name, pass);
-        document.getElementById("userDataWarn").innerHTML = "User Registered, please Log in";
-        user.saveUser();
+        if (accountExists === 0) {
+            const user = new User(name, pass);
+            document.getElementById("userDataWarn").innerHTML = "User Registered, please Log in";
+            user.saveUser();
+        }
+    } else {
+        document.getElementById("userDataWarn").innerHTML = "Please enter both a username and a password";
     }
 
 
@@ -110,15 +112,19 @@ function registerNewUser(name, pass){
 
 function loginExistingUser(name, pass) {
 
-    let accountsInstance = getAccounts()
-    for (let i = 0; i<accountsInstance.userList.length; i++) {
-        if (accountsInstance.userList[i].userName===name && accountsInstance.userList[i].userPassword===pass) {
-            window.location.href = "game.html?name=${userList[i].userName}";
-        } else {
-            document.getElementById("userDataWarn").innerHTML = "No account exists with that username, please register before logging in";
+    if (name !== "" && pass !== "") {
+
+        let accountsInstance = getAccounts()
+        for (let i = 0; i < accountsInstance.userList.length; i++) {
+            if (accountsInstance.userList[i].userName === name && accountsInstance.userList[i].userPassword === pass) {
+                window.location.href = "game.html?name=${userList[i].userName}";
+            } else {
+                document.getElementById("userDataWarn").innerHTML = "No account exists with that username, please register before logging in";
+            }
         }
+    } else {
+        document.getElementById("userDataWarn").innerHTML = "Please enter both a username and a password";
     }
-    return null
 
 }
 

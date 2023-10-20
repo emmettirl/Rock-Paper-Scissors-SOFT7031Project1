@@ -7,9 +7,10 @@
 </head>
 <body>
 <p id="userDataWarn"></p>
-
-<input type="text" id="uName" name="uName" value="John"><br>
-<input type="text" id="uPass" name="uPass" value="password"><br>
+<form>
+    <label for="uName">Username: </label><input type="text" id="uName" name="uName" placeholder="username"><br>
+    <label for="uPass">Password: </label><input type="password" id="uPass" name="uPass" placeholder="password"><br>
+</form>
 <hr>
 <h1>Register</h1>
 <button type="button" onclick="registerNewUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Register</button>
