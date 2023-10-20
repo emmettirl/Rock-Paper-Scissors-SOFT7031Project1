@@ -1,11 +1,9 @@
-
-
-
 class User {
     constructor(userName, password) {
         this.userName = userName;
         this.userPassword = password;
     }
+
 
     saveUser() {
 
@@ -13,9 +11,8 @@ class User {
         accountsInstance.addAccount(this)
         accountsInstance.saveAccounts()
     }
-
-
 }
+
 
 class Accounts {
     constructor() {
@@ -23,10 +20,10 @@ class Accounts {
     };
 
 
-
     addAccount(account) {
         this.userList.push(account)
     }
+
 
     saveAccounts() {
         let cValue = JSON.stringify(this)
@@ -42,10 +39,12 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
+
     for(let i = 0; i <ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') {
@@ -58,11 +57,12 @@ function getCookie(cname) {
     return "";
 }
 
+
 function getAccounts() {
     let cookie = getCookie(cName)
-
     let jsonData;
     let accountsInstance;
+
     if (cookie !== "") {
         console.log("about to parse")
         jsonData = JSON.parse(cookie);
@@ -85,9 +85,7 @@ function getAccounts() {
 }
 
 
-
 function registerNewUser(name, pass){
-
     if (name !== "" && pass !== "") {
         let accountExists = 0;
         for (let i = 0; i < accountsInstance.userList.length; i++) {
@@ -105,15 +103,11 @@ function registerNewUser(name, pass){
     } else {
         document.getElementById("userDataWarn").innerHTML = "Please enter both a username and a password";
     }
-
-
-
 }
 
+
 function loginExistingUser(name, pass) {
-
     if (name !== "" && pass !== "") {
-
         let accountsInstance = getAccounts()
         for (let i = 0; i < accountsInstance.userList.length; i++) {
             if (accountsInstance.userList[i].userName === name && accountsInstance.userList[i].userPassword === pass) {
@@ -122,10 +116,10 @@ function loginExistingUser(name, pass) {
                 document.getElementById("userDataWarn").innerHTML = "No account exists with that username, please register before logging in";
             }
         }
+
     } else {
         document.getElementById("userDataWarn").innerHTML = "Please enter both a username and a password";
     }
-
 }
 
 

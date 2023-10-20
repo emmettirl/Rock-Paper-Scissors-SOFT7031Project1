@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles/mainStyle.css">
+    <script type= "text/javascript" src="scripts/login.js"></script>
+</head>
+<body>
+<p id="userDataWarn"></p>
+<form>
+    <label for="uName">Username: </label><input type="text" id="uName" name="uName" placeholder="username"><br>
+    <label for="uPass">Password: </label><input type="password" id="uPass" name="uPass" placeholder="password"><br>
+</form>
+<hr>
+<h1>Register</h1>
+<button type="button" onclick="registerNewUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Register</button>
+<h1>Log In</h1>
+<button type="button" onclick="loginExistingUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Login</button>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Login and Registration</title>
-        <link rel="stylesheet" href="styles/mainStyle.css">
-    </head>
-
-    <body>
-    <h1> Rock Paper Scissors</h1>
-    <p> Log in or sign up!</p>
-        <section>
-            <button id="login">
-                Login
-            </button>
-        </section>
-
-        <section>
-            <button id="register">
-                Register
-            </button>
-        </section>
-
-    </body>
-
+</body>
 </html>
