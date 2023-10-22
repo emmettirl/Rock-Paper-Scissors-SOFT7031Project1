@@ -1,17 +1,133 @@
+:root {
+    --primaryColour: #e36a00;
+    --complementaryColour: #0079e3;
+    --analogousColour1: #e30008;
+    --analogousColour2: #e3db00;
+    --triadic1: #79e300;
+    --triadic2: #00e36a;
+    --darkBackground: #263238;
+    --lightBackground: #CFD8DC;
+}
+
+
+
+header, main, footer, #gameButtons, #summary {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    text-align: center;
+    font-family: 'Fredoka', sans-serif;
+}
+
+header {
+    color: white;
+}
+
+h1 {
+    font-size: 8em;
+}
+
+body {
+    background-color: var(--darkBackground);
+}
+
+main {
+    background-color: var(--lightBackground);
+    height: 100vh;
+    margin-top: 0;
+}
+
 .summary {
     clear:both;
 }
 
 .stats {
     float:left;
-    margin: 2vw;
+    background-color: var(--primaryColour);
+    width: 100%;
+    border: none;
+    border-radius: 5px;
 }
 
-#gameButtons{
-    clear: both;
+
+button {
+    display: inline-block;
+    padding: .5vh .5vw;
+    background-color: var(--primaryColour);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.gameButton {
-    float:left;
+/* Hover effect for the button */
+button:hover {
+    background-color: var(--complementaryColour);
+}
+
+#gameButtons, .stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+
+}
+
+
+.gameButton, .stats span {
+    flex: 1;
+    margin-top: 1vw;
+    padding: .5vw;
+    color: black;
+    font-size: 2em;
+}
+
+.registrationButtons {
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    margin: 3vw;
+}
+
+section {
+    margin-top: 1vh;
+    padding: 1vw;
+}
+#endResultsection {
+    background-color: var(--complementaryColour);
+}
+
+i {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1vh;
+}
+
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Style for input fields on focus (when clicked) */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #3498db; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.7); /* Add a subtle shadow on focus */
+}
+
+label{
+    font-size: 2em;
     margin: 2vw;
 }

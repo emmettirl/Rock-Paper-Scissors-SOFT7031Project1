@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/mainStyle.css">
     <script type= "text/javascript" src="scripts/rps.js"></script>
+
 </head>
 <body>
-<p id="userDataWarn"></p>
-<form>
-    <label for="uName">Username: </label><input type="text" id="uName" name="uName" placeholder="username"><br>
-    <label for="uPass">Password: </label><input type="password" id="uPass" name="uPass" placeholder="password"><br>
-</form>
-<hr>
-<h1>Register</h1>
-<button type="button" onclick="registerNewUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Register</button>
-<h1>Log In</h1>
-<button type="button" onclick="loginExistingUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Login</button>
+    <header>
+        <h1>Rock Paper Scissors</h1>
+    </header>
+    <main>
 
+        <div id="loginSection">
+            <p id="userDataWarn"></p>
+            <form>
+                <label for="uName">Username: </label><input type="text" id="uName" name="uName" placeholder="username"><br>
+                <label for="uPass">Password: </label><input type="password" id="uPass" name="uPass" placeholder="password"><br>
+            </form>
+            <hr>
+            <button type="button" class = "registrationButtons" onclick="registerNewUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Register</button>
+            <button type="button" class = "registrationButtons" onclick="loginExistingUser(document.getElementById('uName').value, document.getElementById('uPass').value)">Login</button>
+        </div>
+    </main>
 </body>
 </html>

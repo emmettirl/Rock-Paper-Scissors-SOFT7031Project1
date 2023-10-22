@@ -1,52 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles/mainStyle.css">
         <script type= "text/javascript" src="scripts/rps.js"></script>
     </head>
     <body>
         <header>
+            <h1>Rock Paper Scissors</h1>
         </header>
         <main>
-            <h1>Rock Paper Scissors</h1>
 
             <div id="gameButtons">
                 <section class="gameButton">
                     <button id="rock" class="option" onclick="runGame('rock')">
-                            <img src="images/icons8-hand-rock-100.png" alt="Rock" >
+                            <img src="images/rock.png" alt="Rock" >
                     </button>
                     <p>Rock</p>
                 </section>
 
                 <section class="gameButton">
                     <button id="paper" class="option" onclick="runGame('paper')">
-                            <img src="images/icons8-hand-100.png" alt="Paper">
+                            <img src="images/paper.png" alt="Paper">
                     </button>
                     <p>Paper</p>
                 </section>
 
                 <section class="gameButton">
                     <button id="scissors" class="option" onclick="runGame('scissors')">
-                            <img src="images/icons8-hand-scissors-100.png" alt="Scissors">
+                            <img src="images/scissors.png" alt="Scissors">
                     </button>
                     <p>Scissors</p>
                 </section>
 
             </div>
 
-            <div class="summary">
+            <div id="summary">
 
                 <section class="stats" id="results">
-                    <h1>Results</h1>
-                    <p>You: <span id="playerResult"></span></p>
-                    <p>Computer: <span id="computerResult"></span></p>
-                    <p><i id="endresult">Click for a result! </i></p>
+                    <span class = "resultsSpan">
+                        <h2 id="playerName">Player 1: </h2>
+                        <div id="playerResultImage"></div>
+                        <p id="playerResult"></p>
+                    </span>
+
+                    <span class = "resultsSpan">
+                        <h2>Computer: </h2>
+                        <div id="computerResultImage"></div>
+                        <p id="computerResult"></p>
+                    </span>
                 </section>
 
+
+                <section class="stats" id = "endResultsection">
+                    <i id="endresult">Click for a result! </i>
+                </section>
                 <section class="stats" id="scores">
-                    <h1>Scores</h1>
                     <p>User Score is now: <span id="playerScore"></span></p>
                     <p>Computer Score is now: <span id="computerScore">0</span></p>
                 </section>

@@ -217,7 +217,6 @@ function runGame(player1Choice){
     let player2Choice = getComputerChoice();
 
     let result = rockPaperScissors(player1Choice, player2Choice);
-    console.log(player2Choice)
     document.getElementById("playerResult").innerHTML = letter0Upper(player1Choice);
     document.getElementById("computerResult").innerHTML = letter0Upper(player2Choice);
     switch (result) {
@@ -235,6 +234,11 @@ function runGame(player1Choice){
             activeUser.updateUser()
             break;
     }
+
+
+    document.getElementById("playerResultImage").innerHTML=`<img src="images/${player1Choice}.png" alt="${player1Choice}">`;
+    document.getElementById("computerResultImage").innerHTML=`<img src="images/${player2Choice}.png" alt="${player2Choice}">`;
+
     document.getElementById("playerScore").innerHTML = activeUser.playerScore;
     document.getElementById("computerScore").innerHTML = activeUser.computerScore;
 }
@@ -254,12 +258,13 @@ const expiryDays = 5;
 const activeUser = getActiveUserFromURL();
 
 if(endsWithSubstring(window.location.pathname, "game.html")){
-    if (activeUser.userName === null) {
+    if (!activeUser) {
         window.location.href = "index.html";
     }
     window.onload = function(){
         document.getElementById("playerScore").innerText= activeUser.playerScore
         document.getElementById("computerScore").innerText= activeUser.computerScore
+        document.getElementById("playerName").innerText=`${activeUser.userName}: `
     };
 }
 
