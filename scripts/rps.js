@@ -1,21 +1,3 @@
-/* Todo:
-
-use same cookie as rps.js to track scores
-
-
-activearray = readCookie()
-
-if winCheck == 1:
-    increment playerWinCount
-else if winCheck ==2:
-    increment computerWinCount
-
-write scores
-write cookie
-
- */
-
-
 class User {
     constructor(userName, password, playerScore, computerScore) {
         this.userName = userName;

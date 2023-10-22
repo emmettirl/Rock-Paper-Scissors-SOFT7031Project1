@@ -3,13 +3,9 @@
     --complementaryColour: #0079e3;
     --analogousColour1: #e30008;
     --analogousColour2: #e3db00;
-    --triadic1: #79e300;
-    --triadic2: #00e36a;
     --darkBackground: #263238;
     --lightBackground: #CFD8DC;
 }
-
-
 
 header, main, footer, #gameButtons, #summary {
     margin-left: auto;
@@ -25,6 +21,10 @@ header {
 
 h1 {
     font-size: 8em;
+}
+#userDataWarn {
+    font-size: 2em;
+    color: var(--analogousColour1);
 }
 
 body {
@@ -84,11 +84,11 @@ button:hover {
 }
 
 .registrationButtons {
-    padding-top: 2vw;
-    padding-bottom: 2vw;
-    padding-left: 4vw;
-    padding-right: 4vw;
+    padding: 2vw 4vw;
     margin: 3vw;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 section {
